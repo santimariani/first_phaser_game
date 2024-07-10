@@ -112,6 +112,13 @@
             score += 100;
             scoreText.setText('score: ' + score);
 
+            var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+            var bomb = bombs.create(x, 16, 'bomb');
+            bomb.setBounce(1);
+            bomb.setCollideWorldBounds(true);
+            bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
             if (stars.countActive(true) === 0)
             {
                 stars.children.iterate(function (child) {
@@ -119,12 +126,7 @@
 
                 });
 
-                var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-                var bomb = bombs.create(x, 16, 'bomb');
-                bomb.setBounce(1);
-                bomb.setCollideWorldBounds(true);
-                bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+       
             }
         }
 
@@ -159,6 +161,10 @@
             player.setVelocityX(160);
 
             player.anims.play('right', true);
+        }
+        else if (cursors.down.isDown)
+        {
+            player.setVelocityY(450);
         }
         else
         {
